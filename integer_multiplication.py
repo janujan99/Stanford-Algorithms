@@ -41,26 +41,33 @@ def multiply(n1, n2):
     return sum_lists(refined_product)    
 
 def get_test_arrays(length_range):
-    test_array = []
-    for x in range(1,length_range):
-        arr1 = []
-        arr2 = []
-        for i in range(x):
-            arr1.append(random.randint(1,9))
-            arr2.append(random.randint(1,9))
-        test_array.append([arr1, arr2])
-    return test_array
+    arr1 = []
+    arr2 = []
+    for i in range(length_range):
+        arr1.append(random.randint(1,9))
+        arr2.append(random.randint(1,9))
+    
+    return [arr1,arr2]
+
 #assert(multiply([5,6,7,8], [1,2,3,4])) == [7,0,0,6,6,5,2]
 #assert(multiply([9,9,9,9,9,9],[9,9,9,9,9,9])) == [9,9,9,9,9,8,0,0,0,0,0,1]
-length_range = 60
-arrs = get_test_arrays(length_range)
-times = []
+powers_of_ten = [10**x for x in range(5)]
 
-for arr in arrs:
+arrs = [get_test_arrays(x) for x in powers_of_ten]
+times = []
+index = []
+df = pd.DataFrame()
+
+for x in range(len(arrs)):
+    print(x)
+    arr = arrs[x]
     initial = time.time()
     multiply(arr[0], arr[1])
     final = time.time()
     times.append(final-initial)
+    index.append(x)
 
-print("Times for arrays of up to length " + str(length_range) + ": ")
-print(times)
+df['Powers of Ten'] = index
+df['Time (s)'] = times
+
+df.to_csv(path_or_buf="./times.csv", index=False)
