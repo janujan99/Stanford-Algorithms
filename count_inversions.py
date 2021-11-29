@@ -18,20 +18,20 @@ def merge_and_count_split_inversions(arr1, arr2):
         new.extend(arr2[p2:])
     else:
         new.extend(arr1[p1:])
-    
+
     return new, inversions
 
+
 def sort_and_count_inversions(arr) -> Tuple[List[int], int]:
-    if len(arr) == 0:
-        return [],0
-    if len(arr) == 1:
+    if len(arr) == 0 or len(arr) == 1:
         return arr, 0
     split = len(arr) // 2
 
     B, x = sort_and_count_inversions(arr[:split])
     C, y = sort_and_count_inversions(arr[split:])
-    D, z = merge_and_count_split_inversions(B,C)
+    D, z = merge_and_count_split_inversions(B, C)
 
     return D, x+y+z
 
-print(sort_and_count_inversions([1,2,3]))
+
+print(sort_and_count_inversions([1, 2, 3]))
