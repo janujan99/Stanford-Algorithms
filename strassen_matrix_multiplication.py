@@ -6,12 +6,12 @@ class Matrix:
         self.grid = list_of_lists
 
     def get_sub_matrix(self, quadrant):
-        #Top left = 1
-        #Top right = 2
-        #Bottom left = 3
-        #Bottom right = 4
+        # Top left = 1
+        # Top right = 2
+        # Bottom left = 3
+        # Bottom right = 4
         length_sub = len(self.grid[0]) // 2
-        depth_sub = len(self.grid) // 2 
+        depth_sub = len(self.grid) // 2
         if quadrant == 1:
             return Matrix([arr[:length_sub] for arr in self.grid[:depth_sub]])
         elif quadrant == 2:
@@ -28,9 +28,9 @@ class Matrix:
             for x in range(len(self.grid[0])):
                 row.append(self.grid[y][x] + matrix.grid[y][x])
             new.append(row)
-        
+
         return Matrix(new)
-    
+
     def __mul__(self, const):
         new = []
 
@@ -39,8 +39,9 @@ class Matrix:
             for x in range(len(self.grid[0])):
                 row.append(self.grid[y][x]*const)
             new.append(row)
-        
+
         return Matrix(new)
+
 
 def combine_sub_matrices(Q1: Matrix, Q2: Matrix, Q3: Matrix, Q4: Matrix):
     q1 = Q1.grid
@@ -48,7 +49,7 @@ def combine_sub_matrices(Q1: Matrix, Q2: Matrix, Q3: Matrix, Q4: Matrix):
     q3 = Q3.grid
     q4 = Q4.grid
 
-    #merge q1 and q2
+    # merge q1 and q2
     q1_and_q2 = []
     for x in range(len(q1)):
         q1_and_q2.append([num for num in q1[x]]+[num for num in q2[x]])
@@ -60,12 +61,12 @@ def combine_sub_matrices(Q1: Matrix, Q2: Matrix, Q3: Matrix, Q4: Matrix):
     return Matrix(q1_and_q2+q3_and_q4)
 
 
-def strassen(x: Matrix, y:Matrix):
+def strassen(x: Matrix, y: Matrix):
     X = x.grid
     Y = y.grid
     if len(X) == 1 and len(X[0]) == 1:
         return Matrix([[X[0][0]*Y[0][0]]])
-    
+
     A = x.get_sub_matrix(1)
     B = x.get_sub_matrix(2)
     C = x.get_sub_matrix(3)
@@ -85,10 +86,8 @@ def strassen(x: Matrix, y:Matrix):
 
     return combine_sub_matrices(P5+P4+(P2*(-1))+P6, P1+P2, P3+P4, P1+P5+((P3+P7)*(-1)))
 
-m1 = Matrix([[1,2],[3,4]])
-m2 = Matrix([[5,6],[7,8]])
+
+m1 = Matrix([[1, 2], [3, 4]])
+m2 = Matrix([[5, 6], [7, 8]])
 
 print(strassen(m1, m2).grid)
-
-
-
