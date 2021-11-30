@@ -10,7 +10,7 @@ def merge_and_count_split_inversions(arr1, arr2):
         if arr1[p1] > arr2[p2]:
             new.append(arr2[p2])
             p2 += 1
-            inversions += len(arr1[:p1+1])
+            inversions += len(arr1)-p1
         else:
             new.append(arr1[p1])
             p1 += 1
@@ -34,4 +34,4 @@ def sort_and_count_inversions(arr) -> Tuple[List[int], int]:
     return D, x+y+z
 
 
-print(sort_and_count_inversions([1, 2, 3]))
+print(sort_and_count_inversions([3, 2, 1]))
