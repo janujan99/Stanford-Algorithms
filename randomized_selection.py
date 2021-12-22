@@ -21,16 +21,17 @@ def RSelect(A, l, r, i) -> None:
         return A[0]
 
     j = partition(A, l, r)
+
     if i == j:
         return A[j]
-
     elif i < j:
         return RSelect(A, l, j, i)
-    else:
-        return RSelect(A, j + 1, r, i-j)
+    return RSelect(A, j + 1, r, i-j)
+
 
 def randomized_select(A, i):
     return RSelect(A, 0, len(arr), i-1)
 
-arr = [5,1,2,3]
+
+arr = [5, 1, 2, 3]
 print(randomized_select(arr, 3))
