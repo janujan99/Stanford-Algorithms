@@ -1,5 +1,5 @@
 import random
-
+import numpy as np
 
 def min_cut(graph, contraction_lst):
     while len(graph) > 2:
@@ -10,8 +10,8 @@ def min_cut(graph, contraction_lst):
         key_list = list(graph.keys())
         while not valid_edge:
             a = key_list[random.randint(0, len(graph)-1)]
-            b = key_list[random.randint(0, len(graph)-1)]
-            if a != b and a in graph[b]:
+            if len(graph[a]) > 0:
+                b = graph[a][random.randint(0,len(graph[a])-1)]
                 valid_edge = True
 
         # add edge to be contracted to contraction_lst
@@ -41,7 +41,6 @@ def min_cut(graph, contraction_lst):
                 graph[node] = arr
         # remove the removed_vertex from graph
         del graph[removed_vertex]
-    print(len(graph[list(graph.keys())[0]]) == len(graph[list(graph.keys())[1]]))
     return len(graph[list(graph.keys())[0]])
 
 graph = {}
@@ -51,8 +50,16 @@ for line in lines:
     split = [int(x) for x in line.split("\t")[:-1]]
     graph[split[0]] = split[1:]
 
-
-for x in range(100000):
-    print("Min cut: " + str(min_cut(graph, [])))
-#print("Graph: " + str(graph))
+contr_list = []
+minCut = np.inf
+#adj_list = {1: [2,3,4,5], 2: [1,3,4,5], 3: [1,2,4,5,7], 4: [1,2,3,5,8], 5: [1,2,3,4,6], 6: [5,7,8,9,10], 7: [3,6,8,9,10], 8: [4,6,7,9,10], 9: [6,7,8,10], 10:[6,7,8,9]}
+for x in range(100):
+    adj_list = {}
+    for node in graph:
+        adj_list[node] = [x for x in graph[node]]
+    res = min_cut(adj_list, [])
+    if res < minCut:
+        minCut = res
+print(minCut)
+#print("Graph: " + str(adj_list))
 #print("Cut order: " + str(contr_list))
