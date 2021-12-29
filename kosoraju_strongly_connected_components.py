@@ -59,10 +59,10 @@ def dfs(graph, i, visited, rev=False):
     return
 
 
-adj_list = {1: [4], 2: [8], 3: [6], 4: [7],
+directed_graph = {1: [4], 2: [8], 3: [6], 4: [7],
             5: [2], 6: [9], 7: [1], 8: [5, 6], 9: [3, 7]}
 
-dfs_loop(adj_list)
+dfs_loop(directed_graph)
 
 print("Finishing times: " + str(finishing_times))
 print("Leaders: " + str(leader))
