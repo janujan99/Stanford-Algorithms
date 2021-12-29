@@ -9,7 +9,7 @@ def dfs_loop(graph):
     finishing_times = [None]*len(graph)
 
     visited = set()
-    #first pass
+    #first pass, traversing graph in reverse order
     for i in range(len(graph), 0, -1):
         if not i in visited:
             s = i 
@@ -20,6 +20,7 @@ def dfs_loop(graph):
     for node in graph:
         finishing_times_graph[finishing_times[node-1]] = [finishing_times[x-1] for x in graph[node]]
 
+    #second pass, traversing graph with finishing times in normal order
     visited = set()
     for i in range(len(finishing_times_graph), 0, -1):
         if not i in visited:
