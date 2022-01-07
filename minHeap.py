@@ -4,13 +4,13 @@ class MinHeap:
         self.length = len(lst)
 
     def getParentIndex(self, index):
-        return max(0,(index-2)//2)
+        return max(0, (index-2)//2)
 
     def getLeftChildIndex(self, index):
         if index*2 + 1 >= self.length:
             return None
         return index*2 + 1
-    
+
     def getRightChildIndex(self, index):
         if index*2 + 2 >= self.length:
             return None
@@ -30,17 +30,17 @@ class MinHeap:
         return
 
     def heapifyDown(self):
-        index = 0 
-        
+        index = 0
+
         while self.getLeftChildIndex(index):
             new_index = self.getLeftChildIndex(index)
-            if self.getRightChildIndex(index) and self.lst[self.getRightChildIndex(index)]<self.lst[new_index]:
+            if self.getRightChildIndex(index) and self.lst[self.getRightChildIndex(index)] < self.lst[new_index]:
                 new_index = self.getRightChildIndex(index)
             if self.lst[index] > self.lst[new_index]:
                 self.swap(index, new_index)
                 index = new_index
             else:
-                break 
+                break
         return
 
     def add(self, item):
@@ -56,11 +56,9 @@ class MinHeap:
         self.length += -1
         self.heapifyDown()
         return minimum
-    
-            
 
 
-heap = MinHeap([3,4,8,9,7,10,9,15,20,13])
+heap = MinHeap([3, 4, 8, 9, 7, 10, 9, 15, 20, 13])
 
 mine = heap.extract_min()
 
