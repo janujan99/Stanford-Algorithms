@@ -50,6 +50,8 @@ class MinHeap:
         return
 
     def extract_min(self):
+        if self.length == 0:
+            return None
         minimum = self.lst[0]
         self.lst[0] = self.lst[self.length-1]
         self.lst = self.lst[:-1]
@@ -60,7 +62,8 @@ class MinHeap:
 
 heap = MinHeap([3, 4, 8, 9, 7, 10, 9, 15, 20, 13])
 
-mine = heap.extract_min()
-
-print("Minimum: " + str(mine))
-print(heap.lst)
+while heap.length > 0:
+    mine = heap.extract_min()
+    print("Minimum: " + str(mine))
+    print(heap.lst)
+    sc = input()
