@@ -1,3 +1,4 @@
+from typing import List
 def merge(arr1, arr2):
     p1 = 0
     p2 = 0
@@ -26,3 +27,12 @@ def merge_sort(arr):
             return [arr[1], arr[0]]
     split = len(arr) // 2
     return merge(merge_sort(arr[:split]), merge_sort(arr[split:]))
+
+def k_way_merge_sort(k_sorted_arrays: List[List[int]]):
+    temp = []
+    for arr in k_sorted_arrays:
+        temp = merge(temp, arr)
+    #1st call: merge [] with arr -> n elements
+    #2nd call: merge temp with arr -> 2n elements
+    # .... (1+2+....+k)n  = k(k+1)/2
+    return temp

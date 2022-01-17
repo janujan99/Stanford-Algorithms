@@ -1,5 +1,5 @@
 from typing import List, Tuple
-
+import read_text_into_array
 
 def merge_and_count_split_inversions(arr1, arr2):
     inversions = 0
@@ -34,4 +34,4 @@ def sort_and_count_inversions(arr) -> Tuple[List[int], int]:
     return D, x+y+z
 
 
-print(sort_and_count_inversions([3, 2, 1]))
+print(sort_and_count_inversions(read_text_into_array.read_array("/Users/janujansritharan/Desktop/Resumes/IntegerArray.txt")))
